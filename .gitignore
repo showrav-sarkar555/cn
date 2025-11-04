@@ -1,0 +1,20 @@
+# Ignore PDF files
+*.pdf
+
+# Ignore Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Ignore temporary files
+*.tmp
+*.temp
+copilot_today_files.txt
+
+# Ignore Python scripts (keep only web files)
+generate_pdf.py
+generate_pdf_alt.py
+
+# Ignore OS files
+.DS_Store
+Thumbs.db

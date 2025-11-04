@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Computer Networks Assignment - Fiber vs Wireless Comparison</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Assignment Overview -->
+        <section class="assignment-overview">
+            <div class="overview-grid">
+                <div class="connection-card fiber">
+                    <h3><i class="fas fa-bolt"></i> Option 1: Wired Ethernet Connection (1 Gbps fiber)</h3>
+                    <ul>
+                        <li><strong>Speed:</strong> 1 Gbps (1000 Mbps)</li>
+                        <li><strong>Distance:</strong> 5 km between buildings</li>
+                        <li><strong>Propagation Speed:</strong> 2 × 10⁸ m/s</li>
+                        <li><strong>Technology:</strong> Fiber optic connection</li>
+                    </ul>
+                </div>
+                <div class="connection-card wireless">
+                    <h3><i class="fas fa-wifi"></i> Option 2: Wireless Bridge (200 Mbps)</h3>
+                    <ul>
+                        <li><strong>Speed:</strong> 200 Mbps</li>
+                        <li><strong>Distance:</strong> 5 km between buildings</li>
+                        <li><strong>Propagation Speed:</strong> 3 × 10⁸ m/s</li>
+                        <li><strong>Technology:</strong> Wireless bridge between LANs</li>
+                    </ul>
+                </div>
+                <div class="connection-card">
+                    <h3><i class="fas fa-cog"></i> Common Parameters</h3>
+                    <ul>
+                        <li><strong>Average data frame size:</strong> 1500 bytes</li>
+                        <li><strong>Protocol:</strong> Go-Back-N ARQ</li>
+                        <li><strong>Window size:</strong> N = 10</li>
+                        <li><strong>Each building:</strong> 60 computers</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Task a: Transmission and Propagation Delay -->
+        <section class="question-section">
+            <h2><i class="fas fa-clock"></i> Task a) Compute the transmission delay and propagation delay for both options</h2>
+            
+            <div class="question-text">
+                <p><strong>Transmission Delay:</strong> Time to push all data bits onto the transmission medium</p>
+                <p><strong>Propagation Delay:</strong> Time for signal to travel through the physical medium</p>
+            </div>
+
+            <div class="formula-box">
+                <h3>Formulas:</h3>
+                <div class="formula">
+                    Transmission Delay = <span class="fraction">Frame Size / Transmission Rate</span><br>
+                    Propagation Delay = <span class="fraction">Distance / Propagation Speed</span>
+                </div>
+            </div>
+
+            <div class="calculations">
+                <div class="calc-item fiber-calc">
+                    <h4><i class="fas fa-bolt"></i> Option 1: Fiber Optic (1 Gbps)</h4>
+                    <div class="steps">
+                        <p><strong>Transmission Delay:</strong></p>
+                        <p>Frame size = 1500 bytes = 12,000 bits</p>
+                        <p>Transmission rate = 1 Gbps = 1,000,000,000 bps</p>
+                        <p>Transmission Delay = 12,000 ÷ 1,000,000,000 = <span class="result">12 μs</span></p>
+                        
+                        <p><strong>Propagation Delay:</strong></p>
+                        <p>Distance = 5 km = 5,000 m</p>
+                        <p>Propagation speed = 2 × 10⁸ m/s</p>
+                        <p>Propagation Delay = 5,000 ÷ (2 × 10⁸) = <span class="result">25 μs</span></p>
+                    </div>
+                </div>
+
+                <div class="calc-item wireless-calc">
+                    <h4><i class="fas fa-wifi"></i> Option 2: Wireless (200 Mbps)</h4>
+                    <div class="steps">
+                        <p><strong>Transmission Delay:</strong></p>
+                        <p>Frame size = 1500 bytes = 12,000 bits</p>
+                        <p>Transmission rate = 200 Mbps = 200,000,000 bps</p>
+                        <p>Transmission Delay = 12,000 ÷ 200,000,000 = <span class="result">60 μs</span></p>
+                        
+                        <p><strong>Propagation Delay:</strong></p>
+                        <p>Distance = 5 km = 5,000 m</p>
+                        <p>Propagation speed = 3 × 10⁸ m/s</p>
+                        <p>Propagation Delay = 5,000 ÷ (3 × 10⁸) = <span class="result">16.7 μs</span></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="conclusion">
+                <p><i class="fas fa-lightbulb"></i> <strong>Answer:</strong> Fiber has lower transmission delay (12μs vs 60μs) but higher propagation delay (25μs vs 16.7μs) compared to wireless.</p>
+            </div>
+        </section>
+
+        <!-- Task b: Link Utilization -->
+        <section class="question-section">
+            <h2><i class="fas fa-sync-alt"></i> Task b) Calculate the link utilization (efficiency) for each case using window size N = 10</h2>
+            <div class="question-text">
+                <p><strong>Link Utilization:</strong> How efficiently the connection can be used with Go-Back-N ARQ protocol</p>
+            </div>
+
+            <div class="formula-box">
+                <h3>Formula:</h3>
+                <div class="formula">
+                    Utilization = min(1, N / (1 + 2a))<br>
+                    where a = <span class="fraction">Propagation Delay / Transmission Delay</span>
+                </div>
+            </div>
+
+            <div class="calculations">
+                <div class="calc-item fiber-calc">
+                    <h4><i class="fas fa-bolt"></i> Option 1: Fiber Optic Analysis</h4>
+                    <div class="steps">
+                        <p><strong>Step 1:</strong> Calculate 'a' parameter</p>
+                        <p>a = Propagation Delay / Transmission Delay = 25 / 12 = 2.08</p>
+                        
+                        <p><strong>Step 2:</strong> Calculate utilization</p>
+                        <p>Utilization = min(1, 10 / (1 + 2×2.08)) = min(1, 10 / 5.16) = min(1, 1.94)</p>
+                        <p><strong>Result:</strong> <span class="result">100% utilization</span></p>
+                    </div>
+                </div>
+
+                <div class="calc-item wireless-calc">
+                    <h4><i class="fas fa-wifi"></i> Option 2: Wireless Analysis</h4>
+                    <div class="steps">
+                        <p><strong>Step 1:</strong> Calculate 'a' parameter</p>
+                        <p>a = Propagation Delay / Transmission Delay = 16.7 / 60 = 0.28</p>
+                        
+                        <p><strong>Step 2:</strong> Calculate utilization</p>
+                        <p>Utilization = min(1, 10 / (1 + 2×0.28)) = min(1, 10 / 1.56) = min(1, 6.41)</p>
+                        <p><strong>Result:</strong> <span class="result">100% utilization</span></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="conclusion">
+                <p><i class="fas fa-lightbulb"></i> <strong>Answer:</strong> Both options achieve 100% link utilization because window size (N=10) is sufficient for the round-trip time.</p>
+            </div>
+        </section>
+
+        <!-- Task c: Throughput Comparison -->
+        <section class="question-section">
+            <h2><i class="fas fa-tachometer-alt"></i> Task c) Determine which option gives better throughput and explain why</h2>
+            <div class="question-text">
+                <p><strong>Effective Throughput:</strong> Actual data transmission rate considering protocol efficiency</p>
+            </div>
+
+            <div class="throughput-comparison">
+                <div class="throughput-card fiber-card">
+                    <h3><i class="fas fa-bolt"></i> Option 1: Fiber Optic Throughput</h3>
+                    <div class="throughput-details">
+                        <p><strong>Maximum Rate:</strong> 1 Gbps</p>
+                        <p><strong>Link Utilization:</strong> 100%</p>
+                        <p><strong>Effective Throughput:</strong> <span class="big-result">1000 Mbps</span></p>
+                        <p><strong>Data per second:</strong> 125 MB/s</p>
+                    </div>
+                </div>
+
+                <div class="throughput-card wireless-card">
+                    <h3><i class="fas fa-wifi"></i> Option 2: Wireless Throughput</h3>
+                    <div class="throughput-details">
+                        <p><strong>Maximum Rate:</strong> 200 Mbps</p>
+                        <p><strong>Link Utilization:</strong> 100%</p>
+                        <p><strong>Effective Throughput:</strong> <span class="big-result">200 Mbps</span></p>
+                        <p><strong>Data per second:</strong> 25 MB/s</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="performance-ratio">
+                <div class="ratio-box">
+                    <h3><i class="fas fa-chart-bar"></i> Performance Comparison</h3>
+                    <p><strong>Fiber is 5 times faster than Wireless</strong></p>
+                    <p>1000 Mbps ÷ 200 Mbps = 5x better throughput</p>
+                </div>
+            </div>
+
+            <div class="conclusion">
+                <p><i class="fas fa-lightbulb"></i> <strong>Answer:</strong> Option 1 (Fiber) gives better throughput (1000 Mbps vs 200 Mbps) because it has 5x higher bandwidth despite both achieving 100% utilization.</p>
+            </div>
+        </section>
+
+        <!-- Task d: Frame Loss Impact -->
+        <section class="question-section">
+            <h2><i class="fas fa-exclamation-triangle"></i> Task d) If the wireless connection experiences 2% frame loss, estimate the effective throughput considering retransmissions</h2>
+            <div class="question-text">
+                <p><strong>Frame Loss Impact:</strong> How packet loss affects actual throughput due to retransmissions</p>
+            </div>
+
+            <div class="formula-box">
+                <h3>Formula:</h3>
+                <div class="formula">
+                    Effective Throughput = <span class="fraction">Theoretical Throughput × (1 - Frame Loss Rate)</span>
+                </div>
+            </div>
+
+            <div class="calculations">
+                <div class="calc-item wireless-calc">
+                    <h4><i class="fas fa-wifi"></i> Wireless with 2% Frame Loss</h4>
+                    <div class="steps">
+                        <p><strong>Given:</strong></p>
+                        <p>Theoretical throughput = 200 Mbps</p>
+                        <p>Frame loss rate = 2% = 0.02</p>
+                        
+                        <p><strong>Calculation:</strong></p>
+                        <p>Effective Throughput = 200 × (1 - 0.02) = 200 × 0.98</p>
+                        <p><strong>Result:</strong> <span class="result">196 Mbps</span></p>
+                        
+                        <p><strong>Additional Impact:</strong></p>
+                        <p>Retransmission overhead reduces efficiency further</p>
+                        <p>Practical throughput ≈ <span class="result">190-195 Mbps</span></p>
+                    </div>
+                </div>
+
+                <div class="calc-item fiber-calc">
+                    <h4><i class="fas fa-bolt"></i> Comparison with Fiber (0% loss)</h4>
+                    <div class="steps">
+                        <p><strong>Fiber throughput:</strong> 1000 Mbps (no loss)</p>
+                        <p><strong>Wireless with loss:</strong> ~195 Mbps</p>
+                        <p><strong>Performance gap:</strong> 1000 ÷ 195 = 5.13x</p>
+                        <p><strong>Additional advantage:</strong> Fiber is even more superior</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="conclusion">
+                <p><i class="fas fa-lightbulb"></i> <strong>Answer:</strong> With 2% frame loss, wireless effective throughput drops to ~195 Mbps, making fiber 5.13x better instead of 5x, further justifying the fiber option.</p>
+            </div>
+        </section>        <!-- Final Summary -->
+        <section class="summary-section">
+            <h2><i class="fas fa-check-circle"></i> Final Summary</h2>
+            <div class="summary-grid">
+                <div class="summary-card">
+                    <h3><i class="fas fa-trophy"></i> Winner: Fiber Optic</h3>
+                    <ul>
+                        <li><strong>5x faster</strong> data transmission</li>
+                        <li><strong>1 Gbps</strong> vs 200 Mbps throughput</li>
+                        <li>Better for <strong>heavy data usage</strong></li>
+                        <li>More <strong>reliable</strong> connection</li>
+                    </ul>
+                </div>
+                <div class="summary-card">
+                    <h3><i class="fas fa-star"></i> Key Insights</h3>
+                    <ul>
+                        <li>Both have <strong>100% efficiency</strong> with Go-Back-N</li>
+                        <li>Wireless has <strong>lower propagation delay</strong></li>
+                        <li>Fiber has much <strong>lower transmission delay</strong></li>
+                        <li>Overall speed depends on <strong>bandwidth</strong>, not just signal speed</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
