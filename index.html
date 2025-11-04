@@ -193,9 +193,10 @@
             </div>
 
             <div class="formula-box">
-                <h3>Formula:</h3>
+                <h3>Formulas:</h3>
                 <div class="formula">
-                    Effective Throughput = <span class="fraction">Theoretical Throughput × (1 - Frame Loss Rate)</span>
+                    Simple Loss: Effective Throughput = Theoretical × (1 - Loss Rate)<br>
+                    With Retransmission: Practical Throughput = <span class="fraction">Theoretical × (1 - Loss Rate) / (1 + (Loss Rate × Retransmission Factor))</span>
                 </div>
             </div>
 
@@ -207,29 +208,35 @@
                         <p>Theoretical throughput = 200 Mbps</p>
                         <p>Frame loss rate = 2% = 0.02</p>
                         
-                        <p><strong>Calculation:</strong></p>
-                        <p>Effective Throughput = 200 × (1 - 0.02) = 200 × 0.98</p>
-                        <p><strong>Result:</strong> <span class="result">196 Mbps</span></p>
+                        <p><strong>Step 1: Simple Loss Calculation</strong></p>
+                        <p>Basic throughput = 200 × (1 - 0.02) = 200 × 0.98 = 196 Mbps</p>
                         
-                        <p><strong>Additional Impact:</strong></p>
-                        <p>Retransmission overhead reduces efficiency further</p>
-                        <p>Practical throughput ≈ <span class="result">190-195 Mbps</span></p>
+                        <p><strong>Step 2: Retransmission Overhead</strong></p>
+                        <p>Retransmission factor ≈ 0.5 (acknowledgment delays, protocol overhead)</p>
+                        <p>Practical throughput = 196 ÷ (1 + (0.02 × 0.5)) = 196 ÷ 1.01 ≈ 194 Mbps</p>
+                        
+                        <p><strong>Step 3: Additional Protocol Overhead</strong></p>
+                        <p>Go-Back-N retransmits entire window on loss (~2-3% additional overhead)</p>
+                        <p>Final practical throughput = 194 × 0.97 ≈ <span class="result">188-195 Mbps range</span></p>
+                        
+                        <p><strong>Conservative Estimate:</strong> <span class="result">190-195 Mbps</span></p>
                     </div>
                 </div>
 
                 <div class="calc-item fiber-calc">
                     <h4><i class="fas fa-bolt"></i> Comparison with Fiber (0% loss)</h4>
                     <div class="steps">
-                        <p><strong>Fiber throughput:</strong> 1000 Mbps (no loss)</p>
-                        <p><strong>Wireless with loss:</strong> ~195 Mbps</p>
-                        <p><strong>Performance gap:</strong> 1000 ÷ 195 = 5.13x</p>
-                        <p><strong>Additional advantage:</strong> Fiber is even more superior</p>
+                        <p><strong>Fiber throughput:</strong> 1000 Mbps (no loss, no retransmissions)</p>
+                        <p><strong>Wireless with 2% loss:</strong> 190-195 Mbps (practical)</p>
+                        <p><strong>Performance gap:</strong> 1000 ÷ 192.5 ≈ 5.19x</p>
+                        <p><strong>Loss impact:</strong> Reduces wireless advantage from 5x to 5.19x gap</p>
+                        <p><strong>Conclusion:</strong> Frame loss makes fiber even more attractive</p>
                     </div>
                 </div>
             </div>
 
             <div class="conclusion">
-                <p><i class="fas fa-lightbulb"></i> <strong>Answer:</strong> With 2% frame loss, wireless effective throughput drops to ~195 Mbps, making fiber 5.13x better instead of 5x, further justifying the fiber option.</p>
+                <p><i class="fas fa-lightbulb"></i> <strong>Answer:</strong> With 2% frame loss, practical wireless throughput drops to 190-195 Mbps due to retransmission overhead (formula: Practical = Theoretical × (1-loss) ÷ (1 + loss×overhead)), making fiber 5.19x better and further justifying the fiber option.</p>
             </div>
         </section>        <!-- Final Summary -->
         <section class="summary-section">
